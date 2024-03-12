@@ -52,7 +52,7 @@
         /// <returns>
         /// A <see cref="ApiResourceList{T}"/> in case of a cache hit; null otherwise.
         /// </returns>
-        public ApiResourceList<T> GetApiResourceList<T>(string url) where T : ApiResource
+        public ApiResourceList<T>? GetApiResourceList<T>(string url) where T : ApiResource
         {
             Type resourceType = typeof(T);
             return listCaches[resourceType].Get<T>(url) as ApiResourceList<T>;
