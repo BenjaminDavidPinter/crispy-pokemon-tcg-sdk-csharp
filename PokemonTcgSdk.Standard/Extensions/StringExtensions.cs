@@ -23,7 +23,7 @@ public static class StringExtensions
 
     public static string WithFallback(this string primaryString, string secondaryString) => string.IsNullOrWhiteSpace(primaryString) ? secondaryString : primaryString;
 
-    public static string JoinStrings(this IEnumerable<string> input, string delimiter = ", ")
+    public static string? JoinStrings(this IEnumerable<string> input, string delimiter = ", ")
     {
         return input == null ? null : string.Join(delimiter, input.Where(x => x.IsNotEmpty()));
     }
