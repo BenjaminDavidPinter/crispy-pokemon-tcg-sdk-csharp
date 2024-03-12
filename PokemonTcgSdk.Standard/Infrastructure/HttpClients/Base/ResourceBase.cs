@@ -14,7 +14,7 @@ public abstract class ResourceBase
     /// <summary>
     /// The endpoint string for this resource
     /// </summary>
-    public static string ApiEndpoint { get; }
+    public static string? ApiEndpoint { get; }
 
     /// <summary>
     /// Is endpoint case sensitive
