@@ -21,12 +21,12 @@ public abstract class ResourceList<T> where T : ResourceBase
     /// <summary>
     /// The current page
     /// </summary>
-    public string Page { get; set; }
+    public string? Page { get; set; }
 
     /// <summary>
     /// The size of the page
     /// </summary>
-    public string PageSize { get; set; }
+    public string? PageSize { get; set; }
 
     /// <summary>
     /// Marker to show if response is from cache
@@ -44,5 +44,5 @@ public class ApiResourceList<T> : ResourceList<T> where T : ApiResource
     /// A list of un-named API resources.
     /// </summary>
     [JsonProperty("data")]
-    public List<T> Results { get; set; }
+    public List<T>? Results { get; set; }
 }
