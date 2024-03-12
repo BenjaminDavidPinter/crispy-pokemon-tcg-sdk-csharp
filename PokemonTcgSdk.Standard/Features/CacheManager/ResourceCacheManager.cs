@@ -50,7 +50,7 @@
         /// <typeparam name="T">Type of object to get</typeparam>
         /// <param name="id">Id of the resource</param>
         /// <returns>The cached object or null if not found</returns>
-        public T Get<T>(int id) where T : ResourceBase
+        public T? Get<T>(int id) where T : ResourceBase
         {
             System.Type resourceType = typeof(T);
             return _resourceCaches[resourceType].Get(id) as T;
