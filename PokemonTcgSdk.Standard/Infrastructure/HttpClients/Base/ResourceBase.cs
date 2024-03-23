@@ -9,7 +9,7 @@ public abstract class ResourceBase
     /// <summary>
     /// The identifier for this resource
     /// </summary>
-    public abstract string Id { get; set; }
+    public abstract string? Id { get; set; }
 
     /// <summary>
     /// The endpoint string for this resource
