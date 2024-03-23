@@ -172,7 +172,7 @@
         /// <param name="filters">Dictionary of filters based on data fields. e.g name=base </param>
         /// <param name="cancellationToken">Cancellation token for the request; not utilitized if data has been cached</param>
         /// <returns>The paged resource object</returns>
-        public Task<ApiResourceList<T>> GetApiResourceAsync<T>(int take , int skip, IDictionary<string, string> filters, CancellationToken cancellationToken = default)
+        public Task<ApiResourceList<T>> GetApiResourceAsync<T>(int take, int skip, IDictionary<string, string> filters, CancellationToken cancellationToken = default)
             where T : ApiResource
         {
             string url = GetApiEndpointString<T>();
@@ -205,10 +205,10 @@
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
             using var response = await _client.SendAsync(request, HttpCompletionOption.ResponseContentRead, cancellationToken);
 
-            #if DEBUG
+#if DEBUG
             // For debugging respose pre deserialisation
             var responseStr = response.Content.ReadAsStringAsync().Result;
-            #endif
+#endif
 
             response.EnsureSuccessStatusCode();
             return DeserializeStream<T>(await response.Content.ReadAsStreamAsync());
@@ -222,12 +222,12 @@
             using var sr = new System.IO.StreamReader(stream);
             using JsonReader reader = new JsonTextReader(sr);
             var serializer = JsonSerializer.Create();
-            return serializer.Deserialize<T>(reader);
+            return serializer.Deserialize<T>(reader)!;
         }
 
         private static string AddPaginationParamsToUrl(string uri, int? pageSize = null, int? page = null)
         {
-            var queryParameters = new Dictionary<string, string>();
+            var queryParameters = new Dictionary<string, string?>();
 
             // TODO consider to always set the pageSize parameter when not present to the default "20"
             // in order to have a single cached resource list for requests with explicit or implicit default take

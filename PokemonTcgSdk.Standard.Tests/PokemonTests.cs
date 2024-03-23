@@ -58,14 +58,17 @@
             var httpclient = new HttpClient();
             var pokeClient = new PokemonApiClient(httpclient);
 
-            var filter = new SetFilterCollection<string, string> {{"legalities.standard", "legal"}};
+            var filter = new SetFilterCollection<string, string> { { "legalities.standard", "legal" } };
 
             // act
             var page = await pokeClient.GetApiResourceAsync<Set>(filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument, but it's a test
             Assert.That(page.Results.FirstOrDefault()?.Legalities.Standard, Is.EqualTo("Legal"));
+#pragma warning restore CS8604 // Possible null reference argument.
             Assert.That(page.Results.LastOrDefault()?.Legalities.Standard, Is.EqualTo("Legal"));
+
         }
 
         [Test]
@@ -80,7 +83,10 @@
             var page = await pokeClient.GetApiResourceAsync<Set>(5, 2, filter);
 
             // assert
+
+#pragma warning disable CS8604 // Possible null reference argument.
             Assert.That(page.Results.FirstOrDefault()?.Legalities.Standard, Is.EqualTo("Legal"));
+#pragma warning restore CS8604 // Possible null reference argument.
             Assert.That(page.Results.LastOrDefault()?.Legalities.Standard, Is.EqualTo("Legal"));
 
             Assert.That(page.Page, Is.EqualTo("2").NoClip);
@@ -115,7 +121,9 @@
             var page = await pokeClient.GetApiResourceAsync<Card>(5, 2, filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument.
             Assert.That(page.Results.FirstOrDefault()?.Hp, Is.EqualTo(60));
+#pragma warning restore CS8604 // Possible null reference argument.
             Assert.That(page.Results.LastOrDefault()?.Hp, Is.EqualTo(60));
 
             Assert.That(page.Page, Is.EqualTo("2").NoClip);
@@ -153,7 +161,9 @@
             var page = await pokeClient.GetApiResourceAsync<PokemonCard>(10, 1, filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument.
             StringAssert.Contains("Darkrai", page.Results.FirstOrDefault()?.Name);
+#pragma warning restore CS8604 // Possible null reference argument.
             StringAssert.Contains("Darkrai", page.Results.LastOrDefault()?.Name);
 
             Assert.That(page.Page, Is.EqualTo("1").NoClip);
@@ -186,7 +196,9 @@
             var page = await pokeClient.GetApiResourceAsync<TrainerCard>(2, 2, filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument.
             Assert.That(page.Results.FirstOrDefault()?.Name, Is.EqualTo("Tropical Wind"));
+#pragma warning restore CS8604 // Possible null reference argument.
             Assert.That(page.Results.LastOrDefault()?.Name, Is.EqualTo("Tropical Wind"));
 
             Assert.That(page.Page, Is.EqualTo("2").NoClip);
@@ -219,7 +231,9 @@
             var page = await pokeClient.GetApiResourceAsync<EnergyCard>(2, 2, filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument.
             Assert.That(page.Results.FirstOrDefault()?.Name, Is.EqualTo("Double Rainbow Energy"));
+#pragma warning restore CS8604 // Possible null reference argument.
             Assert.That(page.Results.LastOrDefault()?.Name, Is.EqualTo("Double Rainbow Energy"));
 
             Assert.That(page.Page, Is.EqualTo("2").NoClip);
@@ -284,8 +298,8 @@
             // assert
             Assert.That(page.Rarity, Is.Not.Empty);
             Assert.That(page.Rarity.Count, Is.GreaterThanOrEqualTo(1));
-        }        
-        
+        }
+
         [Test]
         public async Task GetPokemon_DictionaryFilters_ApiResourceAsync()
         {
@@ -323,7 +337,9 @@
 
             // assert
             Assert.That(page.Results, Is.Not.Empty);
+#pragma warning disable CS8604 // Possible null reference argument.
             Assert.That(page.Results.Any(x => x.Name == "Darkrai"));
+#pragma warning restore CS8604 // Possible null reference argument.
             Assert.That(page.Results.Any(x => x.Name == "Pikachu"));
             //Not using exact matching so this Assert fails
             //Assert.That(page.Results.Select(item => item.Name), Is.All.EqualTo("Darkai").Or.EqualTo("Pikachu"));
@@ -392,7 +408,9 @@
             var page = await pokeClient.GetApiResourceAsync<PokemonCard>(10, 1, filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument.
             StringAssert.Contains("Celebi", page.Results.FirstOrDefault()?.Name);
+#pragma warning restore CS8604 // Possible null reference argument.
             StringAssert.Contains("Celebi", page.Results.LastOrDefault()?.Name);
             Assert.That(page.Results.FirstOrDefault()?.AncientTrait, Is.Not.Null);
 
@@ -413,7 +431,9 @@
             var page = await pokeClient.GetApiResourceAsync<PokemonCard>(250, 1, filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument.
             Assert.That(page.Results.FirstOrDefault()?.Tcgplayer, Is.Not.Null);
+#pragma warning restore CS8604 // Possible null reference argument.
             Assert.That(page.Results.FirstOrDefault()?.Tcgplayer.Prices.ReverseHolofoil.Market, Is.GreaterThanOrEqualTo(0.0d));
 
             Assert.That(page.Page, Is.EqualTo("1").NoClip);
@@ -434,7 +454,9 @@
             var page = await pokeClient.GetApiResourceAsync<PokemonCard>(10, 1, filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument.
             Assert.That(page.Results.Select(x => x.AncientTrait), Is.Not.Null);
+#pragma warning restore CS8604 // Possible null reference argument.
 
             Assert.That(page.Page, Is.EqualTo("1").NoClip);
             Assert.That(page.PageSize, Is.EqualTo("10").NoClip);
@@ -453,7 +475,9 @@
             var page = await pokeClient.GetApiResourceAsync<PokemonCard>(10, 1, filter);
 
             // assert
+#pragma warning disable CS8604 // Possible null reference argument.
             StringAssert.Contains("Lugia", page.Results.FirstOrDefault()?.Name);
+#pragma warning restore CS8604 // Possible null reference argument.
             StringAssert.Contains("Lugia", page.Results.LastOrDefault()?.Name);
             Assert.That(page.Results.FirstOrDefault()?.Tcgplayer, Is.Not.Null);
             Assert.That(page.Results.FirstOrDefault()?.Tcgplayer.Prices.The1StEdition, Is.Not.Null);
@@ -477,7 +501,9 @@
 
             // assert
             Assert.That(page.Results, Is.Not.Empty);
+#pragma warning disable CS8604 // Possible null reference argument.
             Assert.That(page.Results.Any(x => x.Name == "Charizard"));
+#pragma warning restore CS8604 // Possible null reference argument.
             //Not using exact matching so this Assert fails
             //Assert.That(page.Results.Select(item => item.Name), Is.All.EqualTo("Darkai").Or.EqualTo("Pikachu"));
         }

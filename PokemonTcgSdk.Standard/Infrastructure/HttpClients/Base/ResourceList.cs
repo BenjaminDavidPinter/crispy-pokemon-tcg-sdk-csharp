@@ -42,7 +42,7 @@ public class ApiResourceList<T> : ResourceList<T> where T : ApiResource
 {
     /// <summary>
     /// A list of un-named API resources.
-    /// </summary>
+    /// </summary>  
     [JsonProperty("data")]
     public List<T>? Results { get; set; }
 }
